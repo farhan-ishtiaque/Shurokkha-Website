@@ -1,0 +1,62 @@
+{% extends 'login/base.html' %}
+
+{% block title %}Manage Operators{% endblock %}
+
+{% block content %}
+<h2>👤 Operator Management</h2>
+
+<!-- 🔍 Search by Division -->
+<form method="get" class="mb-4 d-flex align-items-center gap-3">
+  <label for="division" class="form-label mb-0">Search by Division:</label>
+  <select name="division" id="division" class="form-select w-auto">
+    <option value="">All Divisions</option>
+    <option value="dhaka" {% if selected_division == 'dhaka' %}selected{% endif %}>Dhaka</option>
+    <option value="chittagong" {% if selected_division == 'chittagong' %}selected{% endif %}>Chittagong</option>
+    <option value="khulna" {% if selected_division == 'khulna' %}selected{% endif %}>Khulna</option>
+    <option value="rajshahi" {% if selected_division == 'rajshahi' %}selected{% endif %}>Rajshahi</option>
+    <option value="barisal" {% if selected_division == 'barisal' %}selected{% endif %}>Barisal</option>
+    <option value="sylhet" {% if selected_division == 'sylhet' %}selected{% endif %}>Sylhet</option>
+    <option value="mymensingh" {% if selected_division == 'mymensingh' %}selected{% endif %}>Mymensingh</option>
+    <option value="rangpur" {% if selected_division == 'rangpur' %}selected{% endif %}>Rangpur</option>
+  </select>
+  <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<a class="btn btn-success mb-3" href="{% url 'add_operator' %}">➕ Add Operator</a>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-light">
+    <tr>
+      <th>User ID</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Division</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for operator in operators %}
+    <tr>
+      <td>{{ operator.id }}</td>
+      <td>{{ operator.username }}</td>
+      <td>{{ operator.email }}</td>
+      <td>{{ operator.division|title }}</td>
+      <td>
+        <a href="{% url 'edit_operator' operator.id %}" class="btn btn-sm btn-outline-primary me-1">✏️ Edit</a>
+        <a href="{% url 'delete_operator' operator.id %}" class="btn btn-sm btn-outline-danger me-2">🗑 Delete</a>
+
+        {% if operator.is_active %}
+          <span class="badge bg-success">Active</span>
+        {% else %}
+          <span class="badge bg-secondary">Inactive</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5" class="text-center">No operators found.</td></tr>
+    {% endfor %}
+  </tbody>
+  
+</table>
+  <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mb-3">⬅️ Back</a>
+{% endblock %}

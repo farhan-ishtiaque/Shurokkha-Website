@@ -1,0 +1,60 @@
+{% extends 'login/base.html' %}
+{% load static %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Logo and Welcome Text -->
+  <div class="text-center mb-4">
+    <img src="{% static 'images/Shurokkha.png' %}" alt="Logo" style="height: 90px;" class="me-2">
+    <h2 class="d-inline align-middle text-primary">Welcome Admin</h2>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4 mt-4 justify-content-center">
+
+    <!-- Add Operator Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0">
+        <div class="card-body bg-success text-white text-center rounded">
+          <h4 class="card-title mb-3">Add Operator</h4>
+          <a href="{% url 'add_operator' %}" class="btn btn-light btn-lg rounded-pill shadow-sm">➕ Add</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit/Delete Operator Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0">
+        <div class="card-body bg-primary text-white text-center rounded">
+          <h4 class="card-title mb-3">Edit /  Change Status</h4>
+          <a href="{% url 'operator_list' %}" class="btn btn-light btn-lg rounded-pill shadow-sm">✏️🗑 Update</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Operator Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0">
+        <div class="card-body bg-warning text-dark text-center rounded">
+          <h4 class="card-title mb-3">Search Operator</h4>
+          <a href="{% url 'search_list' %}" class="btn btn-dark btn-lg rounded-pill shadow-sm">🔍 Search</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logout Card -->
+    <div class="col">
+      <div class="card h-100 shadow border-0">
+        <div class="card-body bg-danger text-white text-center rounded">
+          <h4 class="card-title mb-3">Logout</h4>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-light btn-lg rounded-pill shadow-sm">🚪 Logout</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

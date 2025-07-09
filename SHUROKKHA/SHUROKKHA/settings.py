@@ -73,11 +73,14 @@ WSGI_APPLICATION = 'SHUROKKHA.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'shurokkha_db',
+        'USER': 'root',
+        'PASSWORD': 'coc@col@1234',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -122,3 +125,12 @@ STATICFILES_DIRS=[STATIC_DIR,]
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'Login.User'
+LOGIN_REDIRECT_URL = '/redirect_user/'
+LOGOUT_REDIRECT_URL = '/login/'
+AUTHENTICATION_BACKENDS = [
+    'Login.backends.UserIDBackend',  # your custom backend
+    'django.contrib.auth.backends.ModelBackend'
+]
+
+

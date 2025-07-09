@@ -17,8 +17,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from Login import views as l
+from django.contrib.auth import views as auth_views
+from Login import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('lg/', include('Login.urls')), 
+ 
+path('login/', views.custom_login, name='login'),
+
+    # Optional: use built-in logout view or your own
+
+    # Redirect user after login based on role
+    path('redirect_user/', views.redirect_user, name='redirect_user'),
+
+    # Include your app's URLs (for dashboard, operator management, etc.)
+    path('', include('Login.urls')),
+    
+
 ]

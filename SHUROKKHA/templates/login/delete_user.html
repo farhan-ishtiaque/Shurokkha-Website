@@ -1,0 +1,13 @@
+{% extends 'login/base.html' %}
+
+{% block title %}Delete Operator{% endblock %}
+
+{% block content %}
+<h2 class="text-danger">🗑 Delete Operator</h2>
+<p>Are you sure you want to delete <strong>{{ user.username }}</strong>?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Yes, Delete</button>
+  <a href="{% url 'operator_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
