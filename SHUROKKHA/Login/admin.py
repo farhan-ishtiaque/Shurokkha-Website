@@ -21,6 +21,6 @@ class UserAdmin(BaseUserAdmin):#custom class inheriting from django default admi
     def save_model(self, request, obj, form, change):
      if not change:
         obj.set_password('operator123')  # Default password
-     super().save_model(request, obj, form, change)
+     super().save_model(request, obj, form, change) #riginal save method from the BaseUserAdmin
 
-admin.site.register(User, UserAdmin)
+admin.site.register(User, UserAdmin) #resigtering my class to user admin and user class to django admin

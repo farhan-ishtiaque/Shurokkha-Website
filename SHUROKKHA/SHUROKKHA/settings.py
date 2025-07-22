@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-0u4m#on)^e!@vlh*$#ndbo1*b71u#b)h)my^d^1t1(ly_*%df-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = []
 
 
@@ -38,10 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Login',
+    'rest_framework',
+    'corsheaders',#alows api access from other domains
+     'Login',
+
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -123,13 +128,19 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[STATIC_DIR,]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+ }
+CORS_ALLOW_ALL_ORIGINS = True 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'Login.User'
 LOGIN_REDIRECT_URL = '/redirect_user/'
 LOGOUT_REDIRECT_URL = '/login/'
 AUTHENTICATION_BACKENDS = [
-    'Login.backends.UserIDBackend',  # your custom backend
+    'Login.backends.UserIDBackend',  
     'django.contrib.auth.backends.ModelBackend'
 ]
 

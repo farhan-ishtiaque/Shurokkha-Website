@@ -4,8 +4,10 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, User
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import User
 from .forms import CustomUserCreationForm, CustomUserChangeForm, UserIDLoginForm
-
-
+from rest_framework import viewsets
+#class TaskViewSet(viewsets.ModelViewSet):
+    #queryset = Task.objects.all()
+    #serializer_class = TaskSerializer
 @login_required
 def redirect_user(request):
     user = request.user
@@ -19,13 +21,13 @@ def redirect_user(request):
 
 def custom_login(request):
     if request.method == 'POST':
-        form = UserIDLoginForm(request.POST)
-        if form.is_valid():
-            user_id = form.cleaned_data['user_id']
+        form = UserIDLoginForm(request.POST) #post since values input
+        if form.is_valid():#authtntication criterias fulfilled
+            user_id = form.cleaned_data['user_id'] #after validation
             password = form.cleaned_data['password']
             try:
                 user = authenticate(request, username=str(user_id), password=password)
-                if user.check_password(password) and user.is_active:
+                if user is not None and user.is_active:
                     auth_login(request, user)
                     return redirect('redirect_user')
                 else:
@@ -36,7 +38,7 @@ def custom_login(request):
     else:
         form = UserIDLoginForm()
     return render(request, 'login/login.html', {'form': form})
-@login_required
+@login_required #if not loggedin sends to login again
 def operator_dashboard(request):
     return render(request, 'login/operator_dashboard.html')
 
@@ -48,25 +50,24 @@ def admin_dashboard(request):
 def operator_list(request):
     if request.user.role != 'admin':
         return redirect('redirect_user')
-    operators = User.objects.filter(role='operator')
+    operators = User.objects.filter(role='operator') #queryset returned by filter only of role operator
     return render(request, 'login/operator_list.html', {'operators': operators})
 
 @login_required
 def add_operator(request):
-    # Get last user from DB, compute next ID
-    last_user = User.objects.order_by('-id').first()
-    next_user_id = last_user.id + 1 if last_user else 1000
+    last_user = User.objects.order_by('-id').first() #gets most recent id
+    next_user_id = last_user.id + 1 if last_user else 1000 #auto deafult id by retrieving from prev ID
     if request.user.role != 'admin':
         return redirect('redirect_user')
 
-    if request.method == 'POST':
+    if request.method == 'POST': #if from submitted then
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            operator = form.save(commit=False)
+            operator = form.save(commit=False) #object created but not saved in database yet as more changes left
             operator.role = 'operator'
-            default_password = "operator123"  # ✅ Set your default password here
-            operator.set_password(default_password)  # ✅ Hash the password
-            operator.save()
+            default_password = "operator123"  # Set your default password here
+            operator.set_password(default_password)  #Hash the password for security
+            operator.save() #wrutten to database
             return redirect('operator_list')
         else:
              print(form.errors)
@@ -134,3 +135,13 @@ def search_list(request):
         'operators': operators,
         'selected_division': division_query or ''
     })
+# views.py
+from rest_framework import viewsets
+from .models import Task
+from .models import TaskSerializer
+from rest_framework.permissions import IsAuthenticated
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated]  # Only logged-in users can access
