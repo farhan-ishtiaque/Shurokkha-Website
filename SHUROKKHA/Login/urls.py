@@ -28,5 +28,9 @@ urlpatterns = [
     path('search/', views.search_list, name='search_list'),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
 
+
+
+    
+
   
 ]
