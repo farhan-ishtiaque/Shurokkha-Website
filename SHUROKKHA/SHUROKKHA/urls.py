@@ -32,6 +32,10 @@ path('login/', views.custom_login, name='login'),
 
     # Include your app's URLs (for dashboard, operator management, etc.)
     path('', include('Login.urls')),
+
+    # Api for Flutter
+
+    path('api/users/', include('app_auth.urls')),
     
 
 ]
