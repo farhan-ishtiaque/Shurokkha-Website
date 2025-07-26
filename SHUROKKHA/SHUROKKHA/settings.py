@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-0u4m#on)^e!@vlh*$#ndbo1*b71u#b)h)my^d^1t1(ly_*%df-
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',#alows api access from other domains
      'Login',
-    'app_auth',  # Custom app for user authentication
+     'police',
+     'firestation',
 
 ]
 
@@ -146,12 +147,3 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://textbook-tackle-recorded-overhead.trycloudflare.com",  # Replace with your current tunnel domain
-]
-
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

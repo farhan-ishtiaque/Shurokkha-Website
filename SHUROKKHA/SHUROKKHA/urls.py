@@ -22,6 +22,9 @@ from Login import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('police/', include('police.urls')),
+    path('fire/', include('firestation.urls')),  # 👈 works like 'police/'
+
  
 path('login/', views.custom_login, name='login'),
 
@@ -32,10 +35,6 @@ path('login/', views.custom_login, name='login'),
 
     # Include your app's URLs (for dashboard, operator management, etc.)
     path('', include('Login.urls')),
-
-    # Api for Flutter
-
-    path('api/users/', include('app_auth.urls')),
     
 
 ]
