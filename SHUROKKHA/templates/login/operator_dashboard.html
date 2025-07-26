@@ -5,6 +5,7 @@
 
 {% block content %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <div class="position-fixed top-0 start-0 m-3">
   <div class="dropdown">
     <button class="btn btn-dark dropdown-toggle shadow" type="button" id="sidebarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -16,60 +17,56 @@
         <div class="fw-bold">Operator</div>
         <hr class="my-1">
       </li>
-      <li><a class="dropdown-item" href="#">🔑 Change Password</a></li>
+     <li><a class="dropdown-item" href="{% url 'change_password' %}">🔑 Change Password</a></li>
+
       <li><a class="dropdown-item" href="#">📂 Previous Cases</a></li>
       <li>
-        <form method="post" action="#" class="d-inline">
-          {% csrf_token %}
-          <button class="dropdown-item bg-transparent border-0 p-0 ps-3">🚪 Logout</button>
+            <form method="post" action="{% url 'logout' %}" class="d-inline">
+            {% csrf_token %}
+          <button type="submit" class="dropdown-item bg-transparent border-0 p-0 ps-3">🚪 Logout</button>
         </form>
       </li>
     </ul>
   </div>
 </div>
 
-    <!-- Main Dashboard Area -->
-    <main class="col-md-10 ms-sm-auto px-md-4 py-4">
-      <h2 class="text-center text-primary mb-4">Welcome Operator</h2>
-
-      <div class="row g-4 justify-content-center">
-        <!-- Emergency Requests -->
-        <div class="col-md-4">
-          <div class="card text-white bg-danger h-100 text-center">
-            <div class="card-body">
-              <h4 class="card-title">Emergency Requests</h4>
-              <p class="card-text">View, verify and assign help</p>
-              <a href="#" class="btn btn-light rounded-pill">📥 Manage</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Live Map -->
-        <div class="col-md-4">
-          <div class="card text-white bg-success h-100 text-center">
-            <div class="card-body">
-              <h4 class="card-title">Live Map</h4>
-              <p class="card-text">Track emergency units and incidents</p>
-              <a href="#" class="btn btn-light rounded-pill">🗺️ Open Map</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Unit Availability -->
-        <div class="col-md-4">
-          <div class="card text-white bg-info h-100 text-center">
-            <div class="card-body">
-              <h4 class="card-title">Unit Availability</h4>
-              <p class="card-text">View unit status and readiness</p>
-              <a href="#" class="btn btn-light rounded-pill">🚓 Status</a>
-            </div>
-          </div>
+<main class="col-md-10 ms-sm-auto px-md-4 py-4">
+  <h2 class="text-center text-primary mb-4">Welcome Operator</h2>
+  <div class="row g-4 justify-content-center">
+    <!-- Live Map Card -->
+    <div class="col-md-4">
+      <div class="card text-white bg-success h-100 text-center">
+        <div class="card-body">
+          <h4 class="card-title">Live Map</h4>
+          <p class="card-text">Track emergency units and incidents</p>
+          <a href="{% url 'live_map' %}" target="_blank" class="btn btn-light rounded-pill">🗺️ Open Map</a>
         </div>
       </div>
-    </main>
+    </div>
 
+    <!-- Register Units -->
+    <div class="col-md-4">
+      <div class="card text-white bg-danger h-100 text-center">
+        <div class="card-body">
+          <h4 class="card-title">Register units</h4>
+          <p class="card-text">Verify and register new units </p>
+          <a href="#" class="btn btn-light rounded-pill">🚓 Register</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manage Units -->
+    <div class="col-md-4">
+      <div class="card text-white bg-info h-100 text-center">
+        <div class="card-body">
+          <h4 class="card-title">Manage units</h4>
+          <p class="card-text">Manages present units</p>
+          <a href="#" class="btn btn-light rounded-pill">📥 Manage</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}

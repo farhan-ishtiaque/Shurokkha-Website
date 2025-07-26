@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 from django.contrib.auth.views import LogoutView
 from rest_framework.routers import DefaultRouter
-from .views import TaskViewSet
+from .views import add_police_station,police_station_list,TaskViewSet,fire_station_list,add_fire_station
 router = DefaultRouter() #registering default api routes from view set
 router.register(r'tasks', TaskViewSet)
 from rest_framework_simplejwt.views import (
@@ -12,7 +12,12 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
-    
+    path('add-fire-station/', views.add_fire_station, name='add_fire_station'),
+    path('fire-stations/', views.fire_station_list, name='fire_station_list'),
+    path('police-stations/', views.police_station_list, name='police_station_list'),
+    path('add-police-station/', views.add_police_station, name='add_police_station'),
+    path('change-password/', views.change_password, name='change_password'),
+    path('live-map/', views.live_map_view, name='live_map'),
     path('api/token/', TokenObtainPairView.as_view(),
         name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(),

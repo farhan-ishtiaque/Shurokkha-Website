@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Emergency Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> <!--jd libary leaflet-->
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<a href="{% url 'operator_dashboard' %}" class="btn btn-secondary mb-3">⬅️ Back</a>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('map').setView([23.6850, 90.3563], 7);  // Centered on Bangladesh
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map); //move,zoom,see around
+
+  // heahquarter
+  L.marker([23.8103, 90.4125]).addTo(map)
+    .bindPopup('Shurokkha HQ (Dhaka)')
+    .openPopup();
+</script>
+
+</body>
+</html>

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',#alows api access from other domains
      'Login',
+     'police',
+     'firestation',
 
 ]
 

@@ -4,15 +4,17 @@
 
 {% block content %}
 <div class="container py-5">
+
   <!-- Logo and Welcome Text -->
   <div class="text-center mb-4">
     <img src="{% static 'images/Shurokkha.png' %}" alt="Logo" style="height: 90px;" class="me-2">
     <h2 class="d-inline align-middle text-primary">Welcome Admin</h2>
   </div>
 
+  <!-- Dashboard Cards -->
   <div class="row row-cols-1 row-cols-md-2 g-4 mt-4 justify-content-center">
 
-    <!-- Add Operator Card -->
+    <!-- Add Operator -->
     <div class="col">
       <div class="card h-100 shadow border-0">
         <div class="card-body bg-success text-white text-center rounded">
@@ -22,17 +24,17 @@
       </div>
     </div>
 
-    <!-- Edit/Delete Operator Card -->
+    <!-- Edit/Delete Operator -->
     <div class="col">
       <div class="card h-100 shadow border-0">
         <div class="card-body bg-primary text-white text-center rounded">
-          <h4 class="card-title mb-3">Edit /  Change Status</h4>
+          <h4 class="card-title mb-3">Edit / Change Status of Operators</h4>
           <a href="{% url 'operator_list' %}" class="btn btn-light btn-lg rounded-pill shadow-sm">✏️🗑 Update</a>
         </div>
       </div>
     </div>
 
-    <!-- Search Operator Card -->
+    <!-- Search Operator -->
     <div class="col">
       <div class="card h-100 shadow border-0">
         <div class="card-body bg-warning text-dark text-center rounded">
@@ -42,7 +44,46 @@
       </div>
     </div>
 
-    <!-- Logout Card -->
+    <!-- Add Police Station -->
+<div class="col">
+  <div class="card h-100 shadow border-0">
+    <div class="card-body bg-info text-white text-center rounded">
+      <h4 class="card-title mb-3">Add Police Station</h4>
+      <a href="{% url 'add_police_station' %}" class="btn btn-light btn-lg rounded-pill shadow-sm">🏢 Add Station</a>
+    </div>
+  </div>
+</div>
+
+<!-- View Police Stations -->
+<div class="col">
+  <div class="card h-100 shadow border-0">
+    <div class="card-body bg-secondary text-white text-center rounded">
+      <h4 class="card-title mb-3">View Police Stations</h4>
+      <a href="{% url 'police_station_list' %}" class="btn btn-light btn-lg rounded-pill shadow-sm">📋 View All</a>
+    </div>
+  </div>
+</div>
+
+<!-- Add Fire Station -->
+<div class="col">
+  <div class="card h-100 shadow border-0">
+    <div class="card-body bg-danger text-white text-center rounded">
+      <h4 class="card-title mb-3">Add Fire Station</h4>
+      <a href="{% url 'add_fire_station' %}" class="btn btn-light btn-lg rounded-pill shadow-sm">🔥 Add Station</a>
+    </div>
+  </div>
+</div>
+
+<!-- View Fire Stations -->
+<div class="col">
+  <div class="card h-100 shadow border-0">
+    <div class="card-body bg-dark text-white text-center rounded">
+      <h4 class="card-title mb-3">View Fire Stations</h4>
+      <a href="{% url 'fire_station_list' %}" class="btn btn-light btn-lg rounded-pill shadow-sm">📋 View All</a>
+    </div>
+  </div>
+</div>
+    <!-- Logout -->
     <div class="col">
       <div class="card h-100 shadow border-0">
         <div class="card-body bg-danger text-white text-center rounded">

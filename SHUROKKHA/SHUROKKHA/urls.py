@@ -22,6 +22,9 @@ from Login import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('police/', include('police.urls')),
+    path('fire/', include('firestation.urls')),  # 👈 works like 'police/'
+
  
 path('login/', views.custom_login, name='login'),
 
